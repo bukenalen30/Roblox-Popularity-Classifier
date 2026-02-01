@@ -36,17 +36,22 @@ st.markdown(
 # Load logo Roblox
 logo = Image.open("logo_roblox.jpeg")  # pastikan file ada di folder yang sama
 
-# Tampilkan logo + judul + emoji dalam satu baris
-col1, col2, col3 = st.columns([1, 4, 1])  # kolom untuk align center
+# Buat 3 kolom: kiri (kosong), tengah (judul), kanan (logo)
+col1, col2, col3 = st.columns([1, 4, 1])  # rasio 1:4:1 agar judul center
 
 with col1:
-    st.image(logo, width=60)  # logo di kiri
+    st.write("")  # kosongkan kolom kiri
 
 with col2:
     st.markdown(
         """
-        <div style="text-align:center; color:white; background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50, #e91e63);
-                    padding: 20px; border-radius:12px; border:2px solid #ffc107;">
+        <div style="
+            text-align:center; 
+            color:white; 
+            background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50, #e91e63);
+            padding: 20px; 
+            border-radius:12px; 
+            border:2px solid #ffc107;">
             <h1 style="margin:0;">Roblox Popularity Classifier 📊</h1>
             <p style="margin:0; font-size:16px;">Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN</p>
         </div>
@@ -55,8 +60,8 @@ with col2:
     )
 
 with col3:
-    st.write("")  
-
+    st.image(logo, width=100)  # logo lebih besar di kanan
+    
 # ==============================================
 # LOAD MODEL DAN RESOURCE
 # ==============================================
