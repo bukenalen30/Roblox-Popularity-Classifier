@@ -66,7 +66,7 @@ with col3:
         <div style="
             display:flex;
             align-items:center;
-            height:100%;
+            height:150%;
         "></div>
         """,
         unsafe_allow_html=True
