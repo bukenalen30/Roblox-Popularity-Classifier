@@ -28,14 +28,13 @@ def load_all():
         knn = joblib.load("knn_model.pkl")
         scaler = joblib.load("scaler.pkl")
         features = joblib.load("features.pkl")
-        label_encoder = joblib.load("label_encoder.pkl")
         evaluation = joblib.load("evaluation.pkl") if "evaluation.pkl" in os.listdir() else None
-        return svm, knn, scaler, features, label_encoder, evaluation
+        return svm, knn, scaler, features, evaluation
     except Exception as e:
         st.error(f"❌ Gagal load model atau resource: {e}")
-        return None, None, None, None, None, None
+        return None, None, None, None, None
 
-svm_model, knn_model, scaler, feature_cols, label_encoder, evaluation = load_all()
+svm_model, knn_model, scaler, feature_cols, evaluation = load_all()
 
 # ==============================================
 # CEK VALIDITAS MODEL
@@ -58,8 +57,8 @@ if scaler is None:
     st.error("❌ ERROR: scaler.pkl gagal dimuat.")
     invalid_svm = invalid_knn = True
 
-if feature_cols is None or label_encoder is None:
-    st.error("❌ ERROR: features.pkl atau label_encoder.pkl gagal dimuat.")
+if feature_cols is None:
+    st.error("❌ ERROR: features.pkl gagal dimuat.")
     invalid_svm = invalid_knn = True
 
 # ==============================================
@@ -89,13 +88,13 @@ if st.sidebar.button("🌟 Prediksi"):
         knn_pred = knn_model.predict(x_scaled)[0]
 
         # ==============================
-        # Mapping label aman tanpa error
+        # Mapping label aman
         # ==============================
         label_map = {0: "Low", 1: "Medium", 2: "High"}
         svm_label = label_map.get(svm_pred, f"Unknown ({svm_pred})")
         knn_label = label_map.get(knn_pred, f"Unknown ({knn_pred})")
 
-        st.subheader("🔮 Hasil Prediksi")
+        st.subheader("🔮 Hasil Prediksi Popularitas Game")
         col1, col2 = st.columns(2)
         with col1:
             st.success(f"**SVM:** {svm_label}")
@@ -103,10 +102,10 @@ if st.sidebar.button("🌟 Prediksi"):
             st.info(f"**KNN:** {knn_label}")
 
 # ==============================================
-# VISUALISASI EVALUASI
+# VISUALISASI CONFUSION MATRIX
 # ==============================================
 if evaluation:
-    st.header("📊 Visualisasi Evaluasi Model")
+    st.header("📊 Confusion Matrix Model")
 
     svm_matrix = evaluation.get("svm_matrix")
     knn_matrix = evaluation.get("knn_matrix")
@@ -129,13 +128,6 @@ if evaluation:
     with colB:
         if knn_matrix is not None:
             plot_matrix(knn_matrix, "Confusion Matrix - KNN")
-
-    st.header("📈 Perbandingan Metrik Evaluasi")
-    st.subheader("SVM Classification Report")
-    st.code(evaluation.get("svm_report", "Tidak ada."))
-
-    st.subheader("KNN Classification Report")
-    st.code(evaluation.get("knn_report", "Tidak ada."))
 
 st.write("---")
 st.caption("🌈 © 2025 — Roblox Popularity ML Deployment | Ceria Theme 🌈")
