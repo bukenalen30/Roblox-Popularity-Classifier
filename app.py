@@ -185,6 +185,7 @@ if svm_matrix is not None or knn_matrix is not None:
 # TAMPILKAN CLASSIFICATION REPORT DENGAN TABEL + WEIGHTED F1 & ACCURACY
 # ==============================================
 import pandas as pd
+import re
 
 def display_classification_report(report_str, model_name):
     """
@@ -199,32 +200,36 @@ def display_classification_report(report_str, model_name):
     st.subheader(f"📈 {model_name} Classification Report")
 
     report_data = []
-    lines = report_str.split('\n')
-
-    # Ambil baris kelas (High, Low, Medium)
-    for line in lines[2:5]:
-        row = line.strip().split()
-        if len(row) < 4:
-            continue
-        label, precision, recall, f1, support = row[0], float(row[1]), float(row[2]), float(row[3]), int(row[4])
-        report_data.append([label, precision, recall, f1, support])
-
-    # Ambil weighted avg & accuracy
     weighted_f1, accuracy = None, None
-    for line in lines:
-        if "weighted avg" in line:
-            parts = line.strip().split()
-            if len(parts) >= 4:
+
+    for line in report_str.split("\n"):
+        line = line.strip()
+        # Cocokkan baris kelas (dimulai huruf)
+        if re.match(r'^[A-Za-z]+', line):
+            parts = line.split()
+            if len(parts) >= 5:
+                label = parts[0]
+                precision = float(parts[1])
+                recall = float(parts[2])
+                f1 = float(parts[3])
+                support = int(parts[4])
+                report_data.append([label, precision, recall, f1, support])
+            # Ambil weighted avg
+            if 'weighted' in line:
                 weighted_f1 = float(parts[3])
-        if "accuracy" in line:
-            parts = line.strip().split()
-            if len(parts) >= 2:
-                accuracy = float(parts[-1])
+        # Ambil accuracy
+        if 'accuracy' in line:
+            try:
+                accuracy = float(line.split()[-1])
+            except:
+                pass
 
-    df = pd.DataFrame(report_data, columns=['Class', 'Precision', 'Recall', 'F1-Score', 'Support'])
-    st.table(df)  # tampilkan tabel rapi
+    if report_data:
+        df = pd.DataFrame(report_data, columns=['Class', 'Precision', 'Recall', 'F1-Score', 'Support'])
+        st.table(df)
+    else:
+        st.info("Tabel kelas tidak tersedia.")
 
-    # Tampilkan weighted F1-score dan accuracy tanpa grafik
     if weighted_f1 is not None:
         st.markdown(f"**Weighted F1-Score:** {weighted_f1:.2f}")
     if accuracy is not None:
