@@ -4,7 +4,8 @@ import numpy as np
 import joblib
 import matplotlib.pyplot as plt
 import os
-import PIL import Image
+from PIL import Image
+
 st.set_page_config(page_title="Roblox Popularity Classifier 🌈", layout="wide")
 
 # ==============================================
@@ -32,19 +33,6 @@ st.markdown(
 # ==============================================
 # CERIA HEADER
 # ==============================================
-from PIL import Image
-import streamlit as st
-
-# ==============================================
-# HEADER DENGAN LOGO ROBLOX DI KIRI + JUDUL DI TENGAH + EMOJI DIAGRAM
-# ==============================================
-import streamlit as st
-from PIL import Image
-
-# ==============================
-# HEADER DENGAN LOGO ROBLOX + JUDUL + EMOJI
-# ==============================
-
 # Load logo Roblox
 logo = Image.open("logo_roblox.jpeg")  # pastikan file ada di folder yang sama
 
