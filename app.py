@@ -155,10 +155,10 @@ if st.sidebar.button("🌟 Prediksi"):
             st.info(f"**KNN:** {knn_label}")
 
 # ==============================================
-# VISUALISASI CONFUSION MATRIX + CLASSIFICATION REPORT
+# VISUALISASI CONFUSION MATRIX
 # ==============================================
 if svm_matrix is not None or knn_matrix is not None:
-    st.header("📊 Confusion Matrix & Classification Report")
+    st.header("📊 Confusion Matrix Model")
 
     def plot_matrix(matrix, title, cmap_color):
         fig, ax = plt.subplots()
@@ -176,15 +176,39 @@ if svm_matrix is not None or knn_matrix is not None:
     with colA:
         if svm_matrix is not None:
             plot_matrix(svm_matrix, "Confusion Matrix - SVM", cmap_color="Blues")
-        if svm_report is not None:
-            st.subheader("📈 SVM Classification Report")
-            st.text(svm_report)
     with colB:
         if knn_matrix is not None:
             plot_matrix(knn_matrix, "Confusion Matrix - KNN", cmap_color="Greens")
-        if knn_report is not None:
-            st.subheader("📈 KNN Classification Report")
-            st.text(knn_report)
+
+# ==============================================
+# TAMPILKAN CLASSIFICATION REPORT DENGAN TABEL + BAR CHART
+# ==============================================
+import pandas as pd
+
+def display_classification_report(report_str, model_name):
+    if report_str is None:
+        st.warning(f"{model_name} classification report tidak tersedia.")
+        return
+
+    st.subheader(f"📈 {model_name} Classification Report")
+    report_data = []
+    lines = report_str.split('\n')
+    for line in lines[2:5]:  # High, Low, Medium
+        row = line.strip().split()
+        if len(row) < 4:
+            continue
+        label, precision, recall, f1, support = row[0], float(row[1]), float(row[2]), float(row[3]), int(row[4])
+        report_data.append([label, precision, recall, f1, support])
+    df = pd.DataFrame(report_data, columns=['Class', 'Precision', 'Recall', 'F1-Score', 'Support'])
+    st.table(df)
+    st.bar_chart(df.set_index('Class')['F1-Score'])
+
+# Panggil function untuk SVM dan KNN
+colA, colB = st.columns(2)
+with colA:
+    display_classification_report(svm_report, "SVM")
+with colB:
+    display_classification_report(knn_report, "KNN")
 
 st.write("---")
 st.caption("🌈 © 2025 — Roblox Popularity ML Deployment | Ceria Theme 🌈")
