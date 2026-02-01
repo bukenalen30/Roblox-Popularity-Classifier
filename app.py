@@ -118,7 +118,7 @@ if scaler is None:
 if feature_cols is None:
     st.error("❌ ERROR: features.pkl gagal dimuat.")
     invalid_svm = invalid_knn = True
-    
+
 # ==============================================
 # CUSTOM CSS - SIDEBAR WARNA KUNING MUDA
 # ==============================================
@@ -159,8 +159,8 @@ if st.sidebar.button("🌟 Prediksi"):
 
         # Mapping label aman
         label_map = {0: "Low", 1: "Medium", 2: "High"}
-        svm_label = label_map.get(svm_pred, f"Unknown ({svm_pred})")
-        knn_label = label_map.get(knn_pred, f"Unknown ({knn_pred})")
+        svm_label = label_map.get(svm_pred, f({svm_pred})")
+        knn_label = label_map.get(knn_pred, f({knn_pred})")
 
         st.subheader("🔮 Hasil Prediksi Popularitas Game")
         col1, col2 = st.columns(2)
