@@ -4,6 +4,7 @@ import numpy as np
 import joblib
 import matplotlib.pyplot as plt
 import os
+from PIL import Image
 
 st.set_page_config(page_title="Roblox Popularity Classifier 🌈", layout="wide")
 
@@ -42,13 +43,13 @@ st.markdown(
     """
     <div style="
         display: flex;
-        justify-content: center;  /* center horizontally */
-        align-items: center;      /* center vertically */
+        justify-content: center;
+        align-items: center;
         background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50, #e91e63);
         padding: 20px; border-radius:12px; border:2px solid #ffc107;
         margin-bottom:20px;
     ">
-        <!-- Logo Roblox di kiri -->
+        <!-- Logo Roblox -->
         <img src="logo_roblox.jpeg" width="60" style="margin-right:15px;">
 
         <!-- Judul + Emoji -->
