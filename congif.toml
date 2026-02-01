@@ -1,0 +1,15 @@
+[server]
+headless = true
+port = 8501
+enableCORS = false
+enableWebsocketCompression = true
+
+[theme]
+primaryColor = "#ff5722"         # merah cerah
+backgroundColor = "#fffde7"      # kuning lembut
+secondaryBackgroundColor = "#e1f5fe"  # biru muda
+textColor = "#4caf50"            # hijau cerah
+font = "sans serif"
+
+[layout]
+wideMode = true

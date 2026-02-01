@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import joblib
 import matplotlib.pyplot as plt
+import os
 
 st.set_page_config(page_title="Roblox Popularity Classifier 🌈", layout="wide")
 
@@ -34,7 +35,6 @@ def load_all():
         st.error(f"❌ Gagal load model atau resource: {e}")
         return None, None, None, None, None, None
 
-import os
 svm_model, knn_model, scaler, feature_cols, label_encoder, evaluation = load_all()
 
 # ==============================================
@@ -88,13 +88,12 @@ if st.sidebar.button("🌟 Prediksi"):
         svm_pred = svm_model.predict(x_scaled)[0]
         knn_pred = knn_model.predict(x_scaled)[0]
 
-        # Jika label encoder ada
-        if label_encoder is not None:
-            svm_label = label_encoder.inverse_transform([svm_pred])[0]
-            knn_label = label_encoder.inverse_transform([knn_pred])[0]
-        else:
-            svm_label = str(svm_pred)
-            knn_label = str(knn_pred)
+        # ==============================
+        # Mapping label aman tanpa error
+        # ==============================
+        label_map = {0: "Low", 1: "Medium", 2: "High"}
+        svm_label = label_map.get(svm_pred, f"Unknown ({svm_pred})")
+        knn_label = label_map.get(knn_pred, f"Unknown ({knn_pred})")
 
         st.subheader("🔮 Hasil Prediksi")
         col1, col2 = st.columns(2)
