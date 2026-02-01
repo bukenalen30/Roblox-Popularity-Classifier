@@ -180,60 +180,35 @@ if svm_matrix is not None or knn_matrix is not None:
         if knn_matrix is not None:
             plot_matrix(knn_matrix, "Confusion Matrix - KNN", cmap_color="Greens")
 
-
 # ==============================================
-# TAMPILKAN CLASSIFICATION REPORT DENGAN TABEL + WEIGHTED F1 & ACCURACY
+# TAMPILKAN CLASSIFICATION REPORT DENGAN TABEL + BAR CHART
 # ==============================================
 import pandas as pd
-import re
 
 def display_classification_report(report_str, model_name):
-    """
-    Menampilkan classification report rapi, weighted F1, dan accuracy
-    report_str: string dari classification_report sklearn
-    model_name: 'SVM' atau 'KNN'
-    """
     if report_str is None:
         st.warning(f"{model_name} classification report tidak tersedia.")
         return
 
     st.subheader(f"📈 {model_name} Classification Report")
-
     report_data = []
-    weighted_f1, accuracy = None, None
+    lines = report_str.split('\n')
+    for line in lines[2:5]:  # High, Low, Medium
+        row = line.strip().split()
+        if len(row) < 4:
+            continue
+        label, precision, recall, f1, support = row[0], float(row[1]), float(row[2]), float(row[3]), int(row[4])
+        report_data.append([label, precision, recall, f1, support])
+    df = pd.DataFrame(report_data, columns=['Class', 'Precision', 'Recall', 'F1-Score', 'Support'])
+    st.table(df)
+    st.bar_chart(df.set_index('Class')['F1-Score'])
 
-    for line in report_str.split("\n"):
-        line = line.strip()
-        # Cocokkan baris kelas (dimulai huruf)
-        if re.match(r'^[A-Za-z]+', line):
-            parts = line.split()
-            if len(parts) >= 5:
-                label = parts[0]
-                precision = float(parts[1])
-                recall = float(parts[2])
-                f1 = float(parts[3])
-                support = int(parts[4])
-                report_data.append([label, precision, recall, f1, support])
-            # Ambil weighted avg
-            if 'weighted' in line:
-                weighted_f1 = float(parts[3])
-        # Ambil accuracy
-        if 'accuracy' in line:
-            try:
-                accuracy = float(line.split()[-1])
-            except:
-                pass
-
-    if report_data:
-        df = pd.DataFrame(report_data, columns=['Class', 'Precision', 'Recall', 'F1-Score', 'Support'])
-        st.table(df)
-    else:
-        st.info("Tabel kelas tidak tersedia.")
-
-    if weighted_f1 is not None:
-        st.markdown(f"**Weighted F1-Score:** {weighted_f1:.2f}")
-    if accuracy is not None:
-        st.markdown(f"**Accuracy:** {accuracy:.2f}")
+# Panggil function untuk SVM dan KNN
+colA, colB = st.columns(2)
+with colA:
+    display_classification_report(svm_report, "SVM")
+with colB:
+    display_classification_report(knn_report, "KNN")
 
 st.write("---")
 st.caption("🌈 © 2025 — Roblox Popularity ML Deployment | Ceria Theme 🌈")
