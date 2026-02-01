@@ -72,22 +72,6 @@ with col3:
     )
     st.image(logo, width=100)  # logo di kanan, vertikal center
 
-
-with col3:
-    # Gunakan container flex agar logo vertikal center
-    st.markdown(
-        f"""
-        <div style="
-            display:flex; 
-            align-items:center;      /* center vertical */
-            height:100%;             /* isi tinggi kolom sesuai bar header */
-        ">
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-    st.image(logo, width=100)  # logo di kanan, pasti sejajar vertikal
-
 # ==============================================
 # LOAD MODEL DAN RESOURCE
 # ==============================================
