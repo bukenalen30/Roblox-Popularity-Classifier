@@ -4,8 +4,7 @@ import numpy as np
 import joblib
 import matplotlib.pyplot as plt
 import os
-from PIL import Image
-
+import PIL import Image
 st.set_page_config(page_title="Roblox Popularity Classifier 🌈", layout="wide")
 
 # ==============================================
@@ -39,32 +38,36 @@ import streamlit as st
 # ==============================================
 # HEADER DENGAN LOGO ROBLOX DI KIRI + JUDUL DI TENGAH + EMOJI DIAGRAM
 # ==============================================
-st.markdown(
-    """
-    <div style="
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50, #e91e63);
-        padding: 20px; border-radius:12px; border:2px solid #ffc107;
-        margin-bottom:20px;
-    ">
-        <!-- Logo Roblox -->
-        <img src="logo_roblox.jpeg" width="60" style="margin-right:15px;">
+import streamlit as st
+from PIL import Image
 
-        <!-- Judul + Emoji -->
-        <div style="display: flex; flex-direction: column; align-items: center; color:white;">
-            <div style="font-size:28px; font-weight:bold;">
-                Roblox Popularity Classifier <span style="margin-left:10px;">📊</span>
-            </div>
-            <div style="font-size:16px; margin-top:5px;">
-                Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN.
-            </div>
+# ==============================
+# HEADER DENGAN LOGO ROBLOX + JUDUL + EMOJI
+# ==============================
+
+# Load logo Roblox
+logo = Image.open("logo_roblox.jpeg")  # pastikan file ada di folder yang sama
+
+# Tampilkan logo + judul + emoji dalam satu baris
+col1, col2, col3 = st.columns([1, 4, 1])  # kolom untuk align center
+
+with col1:
+    st.image(logo, width=60)  # logo di kiri
+
+with col2:
+    st.markdown(
+        """
+        <div style="text-align:center; color:white; background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50, #e91e63);
+                    padding: 20px; border-radius:12px; border:2px solid #ffc107;">
+            <h1 style="margin:0;">Roblox Popularity Classifier 📊</h1>
+            <p style="margin:0; font-size:16px;">Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN</p>
         </div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+        """,
+        unsafe_allow_html=True
+    )
+
+with col3:
+    st.write("")  
 
 # ==============================================
 # LOAD MODEL DAN RESOURCE
