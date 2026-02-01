@@ -32,17 +32,16 @@ st.markdown(
 # ==============================================
 # CERIA HEADER
 # ==============================================
+from PIL import Image
+import streamlit as st
+
+logo = Image.open("logo_roblox.jpeg")  # pastikan nama file sesuai
+st.image(logo, width=60)  # tampilkan logo
+
 st.markdown("""
-    <div style="background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50, #e91e63);
-                padding:20px; border-radius:12px; border:2px solid #ffc107; margin-bottom:20px; text-align:center;">
-        <!-- Logo Roblox PNG -->
-        <img src="logo_roblox.jpeg" width="60" style="vertical-align:middle;">
-        <!-- Judul -->
-        <span style="font-size:28px; color:white; font-weight:bold; margin:0 10px;">Roblox Popularity Classifier</span>
-        <!-- Emoji diagram -->
-        <span style="font-size:28px;">📊</span>
-        <p style="color:white;">Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN.</p>
-    </div>
+    <span style="font-size:28px; color:white; font-weight:bold; margin-left:10px;">Roblox Popularity Classifier</span>
+    <span style="font-size:28px;">📊</span>
+    <p style="color:white;">Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN.</p>
 """, unsafe_allow_html=True)
 
 # ==============================================
