@@ -37,7 +37,7 @@ st.markdown(
 logo = Image.open("logo_roblox.jpeg")  # pastikan file ada di folder yang sama
 
 # Tambahkan beberapa baris kosong sebelum header supaya turun
-st.markdown("<br><br><br>", unsafe_allow_html=True)
+st.markdown("<br><br>", unsafe_allow_html=True)
 
 # Layout 3 kolom: kiri kosong, tengah judul+emoji, kanan logo
 col1, col2, col3 = st.columns([1, 4, 1])
