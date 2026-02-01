@@ -33,25 +33,19 @@ st.markdown(
 # ==============================================
 # CERIA HEADER
 # ==============================================
-# Load logo Roblox
 logo = Image.open("logo_roblox.jpeg")  # pastikan file ada di folder yang sama
+st.markdown("<br><br>", unsafe_allow_html=True)  # jarak dari atas
 
-# Tambahkan beberapa baris kosong sebelum header supaya turun
-st.markdown("<br><br>", unsafe_allow_html=True)
-
-# Layout 3 kolom: kiri kosong, tengah judul+emoji, kanan logo
 col1, col2, col3 = st.columns([1, 4, 1])
-
 with col1:
     st.write("")
-
 with col2:
     st.markdown(
         """
         <div style="
             text-align:center; 
             background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50, #e91e63);
-            padding:20px; 
+            padding:40px; 
             border-radius:12px; 
             border:2px solid #ffc107;
             margin-bottom:20px ">
@@ -61,9 +55,7 @@ with col2:
         """,
         unsafe_allow_html=True
     )
-
 with col3:
-    # container untuk vertical center logo
     st.markdown(
         """
         <div style="
@@ -74,7 +66,7 @@ with col3:
         """,
         unsafe_allow_html=True
     )
-    st.image(logo, width=120)  # logo di kanan, vertikal center
+    st.image(logo, width=120)  # logo kanan, vertikal center
 
 # ==============================================
 # LOAD MODEL DAN RESOURCE
@@ -87,16 +79,20 @@ def load_all():
         scaler = joblib.load("scaler.pkl")
         features = joblib.load("features.pkl")
         
-        # Load confusion matrix jika ada
+        # Confusion matrix
         svm_matrix = joblib.load("svm_confusion_matrix.pkl") if "svm_confusion_matrix.pkl" in os.listdir() else None
         knn_matrix = joblib.load("knn_confusion_matrix.pkl") if "knn_confusion_matrix.pkl" in os.listdir() else None
         
-        return svm, knn, scaler, features, svm_matrix, knn_matrix
+        # Classification report
+        svm_report = joblib.load("svm_classification_report.pkl") if "svm_classification_report.pkl" in os.listdir() else None
+        knn_report = joblib.load("knn_classification_report.pkl") if "knn_classification_report.pkl" in os.listdir() else None
+
+        return svm, knn, scaler, features, svm_matrix, knn_matrix, svm_report, knn_report
     except Exception as e:
         st.error(f"❌ Gagal load model atau resource: {e}")
-        return None, None, None, None, None, None
+        return None, None, None, None, None, None, None, None
 
-svm_model, knn_model, scaler, feature_cols, svm_matrix, knn_matrix = load_all()
+svm_model, knn_model, scaler, feature_cols, svm_matrix, knn_matrix, svm_report, knn_report = load_all()
 
 # ==============================================
 # CEK VALIDITAS MODEL
@@ -135,23 +131,18 @@ for col in feature_cols:
 # PREDIKSI
 # ==============================================
 if st.sidebar.button("🌟 Prediksi"):
-
     if invalid_svm or invalid_knn:
         st.error("❌ Tidak dapat melakukan prediksi karena model tidak valid.")
     else:
-
         x_df = pd.DataFrame([list(inputs.values())], columns=feature_cols)
         st.write("### 🔍 Input DataFrame:")
         st.write(x_df)
 
         x_scaled = scaler.transform(x_df)
-
         svm_pred = svm_model.predict(x_scaled)[0]
         knn_pred = knn_model.predict(x_scaled)[0]
 
-        # ==============================
         # Mapping label aman
-        # ==============================
         label_map = {0: "Low", 1: "Medium", 2: "High"}
         svm_label = label_map.get(svm_pred, f"Unknown ({svm_pred})")
         knn_label = label_map.get(knn_pred, f"Unknown ({knn_pred})")
@@ -164,37 +155,36 @@ if st.sidebar.button("🌟 Prediksi"):
             st.info(f"**KNN:** {knn_label}")
 
 # ==============================================
-# VISUALISASI CONFUSION MATRIX DENGAN WARNA SOFT & BERBEDA
+# VISUALISASI CONFUSION MATRIX + CLASSIFICATION REPORT
 # ==============================================
 if svm_matrix is not None or knn_matrix is not None:
-    st.header("📊 Confusion Matrix Model")
+    st.header("📊 Confusion Matrix & Classification Report")
 
     def plot_matrix(matrix, title, cmap_color):
         fig, ax = plt.subplots()
-        # Warna soft sesuai cmap_color
         cax = ax.imshow(matrix, cmap=cmap_color, alpha=0.8)
         ax.set_title(title, color="#333333")
         ax.set_xlabel("Predicted", color="#333333")
         ax.set_ylabel("Actual", color="#333333")
-        
-        # Tampilkan angka di tengah kotak
         for i in range(matrix.shape[0]):
             for j in range(matrix.shape[1]):
                 ax.text(j, i, matrix[i, j], ha="center", va="center", color="black", fontsize=12)
-        
-        # Tambahkan colorbar
         fig.colorbar(cax, ax=ax, fraction=0.046, pad=0.04)
         st.pyplot(fig)
 
     colA, colB = st.columns(2)
     with colA:
         if svm_matrix is not None:
-            # SVM = soft biru
             plot_matrix(svm_matrix, "Confusion Matrix - SVM", cmap_color="Blues")
+        if svm_report is not None:
+            st.subheader("📈 SVM Classification Report")
+            st.text(svm_report)
     with colB:
         if knn_matrix is not None:
-            # KNN = soft hijau
             plot_matrix(knn_matrix, "Confusion Matrix - KNN", cmap_color="Greens")
+        if knn_report is not None:
+            st.subheader("📈 KNN Classification Report")
+            st.text(knn_report)
 
 st.write("---")
 st.caption("🌈 © 2025 — Roblox Popularity ML Deployment | Ceria Theme 🌈")
