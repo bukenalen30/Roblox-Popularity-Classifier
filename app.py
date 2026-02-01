@@ -1,103 +1,142 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import joblib
+import matplotlib.pyplot as plt
 
-# ======================================================
-# PAGE CONFIG
-# ======================================================
-st.set_page_config(
-    page_title="Roblox Popularity Classifier",
-    layout="wide"
-)
+st.set_page_config(page_title="Roblox Popularity Classifier 🌈", layout="wide")
 
-# ======================================================
-# HEADER
-# ======================================================
+# ==============================================
+# CERIA HEADER
+# ==============================================
 st.markdown("""
-<div style="background:linear-gradient(90deg,#a1c4fd,#c2e9fb);
-            padding:25px;
-            border-radius:15px;
-            margin-bottom:25px;">
-    <h1 style="text-align:center;color:#0f172a;">
-        🎮 Roblox Game Popularity Classifier
-    </h1>
-    <p style="text-align:center;color:#1e293b;">
-        Prediksi tingkat popularitas game Roblox menggunakan SVM dan KNN
-    </p>
-</div>
+    <div style="background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50, #e91e63);
+                padding:20px; border-radius:12px; border:2px solid #ffc107; margin-bottom:20px;">
+        <h1 style="color:white; text-align:center;">🌈 Roblox Game Popularity Classifier 🌈</h1>
+        <p style="color:white; text-align:center;">Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN.</p>
+    </div>
 """, unsafe_allow_html=True)
 
-# ======================================================
-# LOAD MODEL & SCALER
-# ======================================================
+# ==============================================
+# LOAD MODEL DAN RESOURCE
+# ==============================================
 @st.cache_resource
-def load_artifacts():
-    svm_model = joblib.load("svm_model.pkl")
-    knn_model = joblib.load("knn_model.pkl")
-    scaler = joblib.load("scaler.pkl")
-    return svm_model, knn_model, scaler
+def load_all():
+    try:
+        svm = joblib.load("svm_model.pkl")
+        knn = joblib.load("knn_model.pkl")
+        scaler = joblib.load("scaler.pkl")
+        features = joblib.load("features.pkl")
+        label_encoder = joblib.load("label_encoder.pkl")
+        evaluation = joblib.load("evaluation.pkl") if "evaluation.pkl" in os.listdir() else None
+        return svm, knn, scaler, features, label_encoder, evaluation
+    except Exception as e:
+        st.error(f"❌ Gagal load model atau resource: {e}")
+        return None, None, None, None, None, None
 
-svm_model, knn_model, scaler = load_artifacts()
+import os
+svm_model, knn_model, scaler, feature_cols, label_encoder, evaluation = load_all()
 
-# ======================================================
-# FEATURE (HARUS SAMA DENGAN TRAINING)
-# ======================================================
-activity_features = [
-    "Active",
-    "Visits",
-    "Favourites",
-    "Likes",
-    "Dislikes"
-]
+# ==============================================
+# CEK VALIDITAS MODEL
+# ==============================================
+def model_invalid(model, name):
+    if model is None:
+        return True
+    if isinstance(model, np.ndarray):
+        st.error(f"❌ ERROR: {name} adalah numpy.ndarray — file PKL salah.")
+        return True
+    if not hasattr(model, "predict"):
+        st.error(f"❌ ERROR: {name} tidak punya method .predict() — file PKL rusak.")
+        return True
+    return False
 
-# ======================================================
+invalid_svm = model_invalid(svm_model, "svm_model.pkl")
+invalid_knn = model_invalid(knn_model, "knn_model.pkl")
+
+if scaler is None:
+    st.error("❌ ERROR: scaler.pkl gagal dimuat.")
+    invalid_svm = invalid_knn = True
+
+if feature_cols is None or label_encoder is None:
+    st.error("❌ ERROR: features.pkl atau label_encoder.pkl gagal dimuat.")
+    invalid_svm = invalid_knn = True
+
+# ==============================================
 # SIDEBAR INPUT
-# ======================================================
-st.sidebar.header("🧩 Input Activity Feature")
+# ==============================================
+st.sidebar.write("### Masukkan fitur game Roblox")
+inputs = {}
+for col in feature_cols:
+    inputs[col] = st.sidebar.number_input(col, min_value=0, value=0)
 
-active = st.sidebar.number_input("Active Players", min_value=0)
-visits = st.sidebar.number_input("Visits", min_value=0)
-favourites = st.sidebar.number_input("Favourites", min_value=0)
-likes = st.sidebar.number_input("Likes", min_value=0)
-dislikes = st.sidebar.number_input("Dislikes", min_value=0)
-
-# ======================================================
+# ==============================================
 # PREDIKSI
-# ======================================================
-if st.sidebar.button("🚀 Prediksi Popularitas"):
+# ==============================================
+if st.sidebar.button("🌟 Prediksi"):
 
-    X_input = pd.DataFrame([[
-        active, visits, favourites, likes, dislikes
-    ]], columns=activity_features)
+    if invalid_svm or invalid_knn:
+        st.error("❌ Tidak dapat melakukan prediksi karena model tidak valid.")
+    else:
 
-    st.subheader("📥 Data Input")
-    st.dataframe(X_input, use_container_width=True)
+        x_df = pd.DataFrame([list(inputs.values())], columns=feature_cols)
+        st.write("### 🔍 Input DataFrame:")
+        st.write(x_df)
 
-    X_scaled = scaler.transform(X_input)
+        x_scaled = scaler.transform(x_df)
 
-    svm_pred = svm_model.predict(X_scaled)[0]
-    knn_pred = knn_model.predict(X_scaled)[0]
+        svm_pred = svm_model.predict(x_scaled)[0]
+        knn_pred = knn_model.predict(x_scaled)[0]
 
-    label_map = {
-        0: "Low 🔴",
-        1: "Medium 🟡",
-        2: "High 🟢"
-    }
+        # Jika label encoder ada
+        if label_encoder is not None:
+            svm_label = label_encoder.inverse_transform([svm_pred])[0]
+            knn_label = label_encoder.inverse_transform([knn_pred])[0]
+        else:
+            svm_label = str(svm_pred)
+            knn_label = str(knn_pred)
 
-    st.subheader("🔮 Hasil Prediksi")
+        st.subheader("🔮 Hasil Prediksi")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.success(f"**SVM:** {svm_label}")
+        with col2:
+            st.info(f"**KNN:** {knn_label}")
 
-    col1, col2 = st.columns(2)
+# ==============================================
+# VISUALISASI EVALUASI
+# ==============================================
+if evaluation:
+    st.header("📊 Visualisasi Evaluasi Model")
 
-    with col1:
-        st.success(f"**SVM Prediction**  
-        {label_map[svm_pred]}")
+    svm_matrix = evaluation.get("svm_matrix")
+    knn_matrix = evaluation.get("knn_matrix")
 
-    with col2:
-        st.info(f"**KNN Prediction**  
-        {label_map[knn_pred]}")
+    def plot_matrix(matrix, title):
+        fig, ax = plt.subplots()
+        ax.imshow(matrix, cmap="coolwarm")
+        ax.set_title(title, color="#ff5722")
+        ax.set_xlabel("Predicted", color="#4caf50")
+        ax.set_ylabel("Actual", color="#4caf50")
+        for i in range(matrix.shape[0]):
+            for j in range(matrix.shape[1]):
+                ax.text(j, i, matrix[i, j], ha="center", va="center", color="black")
+        st.pyplot(fig)
 
-# ======================================================
-# FOOTER
-# ======================================================
-st.markdown("---")
-st.caption("✨ Deployment ML — Streamlit | Roblox Popularity Classification")
+    colA, colB = st.columns(2)
+    with colA:
+        if svm_matrix is not None:
+            plot_matrix(svm_matrix, "Confusion Matrix - SVM")
+    with colB:
+        if knn_matrix is not None:
+            plot_matrix(knn_matrix, "Confusion Matrix - KNN")
+
+    st.header("📈 Perbandingan Metrik Evaluasi")
+    st.subheader("SVM Classification Report")
+    st.code(evaluation.get("svm_report", "Tidak ada."))
+
+    st.subheader("KNN Classification Report")
+    st.code(evaluation.get("knn_report", "Tidak ada."))
+
+st.write("---")
+st.caption("🌈 © 2025 — Roblox Popularity ML Deployment | Ceria Theme 🌈")
