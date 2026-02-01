@@ -202,6 +202,11 @@ def display_classification_report(report_str, model_name):
     df = pd.DataFrame(report_data, columns=['Class', 'Precision', 'Recall', 'F1-Score', 'Support'])
     st.table(df)
 
+if weighted_f1 is not None:
+        st.markdown(f"**Weighted F1-Score:** {weighted_f1:.2f}")
+    if accuracy is not None:
+        st.markdown(f"**Accuracy:** {accuracy:.2f}")
+        
 # Panggil function untuk SVM dan KNN
 colA, colB = st.columns(2)
 with colA:
