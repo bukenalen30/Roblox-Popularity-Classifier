@@ -38,27 +38,27 @@ import streamlit as st
 # ==============================================
 # HEADER DENGAN LOGO ROBLOX DI KIRI + JUDUL DI TENGAH + EMOJI DIAGRAM
 # ==============================================
-# Load logo Roblox JPEG
-logo = Image.open("logo_roblox.jpeg")
-
 st.markdown(
-    f"""
+    """
     <div style="
         display: flex;
-        justify-content: center;   /* center horizontally */
-        align-items: center;       /* center vertically */
+        justify-content: center;  /* center horizontally */
+        align-items: center;      /* center vertically */
         background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50, #e91e63);
         padding: 20px; border-radius:12px; border:2px solid #ffc107;
         margin-bottom:20px;
     ">
-        <!-- Logo Roblox -->
+        <!-- Logo Roblox di kiri -->
         <img src="logo_roblox.jpeg" width="60" style="margin-right:15px;">
-        
-        <!-- Judul dan Emoji -->
-        <div style="text-align:center; color:white;">
-            <span style="font-size:28px; font-weight:bold;">Roblox Popularity Classifier</span>
-            <span style="font-size:28px; margin-left:10px;">📊</span>
-            <p style="margin:0; font-size:16px;">Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN.</p>
+
+        <!-- Judul + Emoji -->
+        <div style="display: flex; flex-direction: column; align-items: center; color:white;">
+            <div style="font-size:28px; font-weight:bold;">
+                Roblox Popularity Classifier <span style="margin-left:10px;">📊</span>
+            </div>
+            <div style="font-size:16px; margin-top:5px;">
+                Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN.
+            </div>
         </div>
     </div>
     """,
