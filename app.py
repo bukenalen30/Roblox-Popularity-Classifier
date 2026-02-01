@@ -118,6 +118,21 @@ if scaler is None:
 if feature_cols is None:
     st.error("❌ ERROR: features.pkl gagal dimuat.")
     invalid_svm = invalid_knn = True
+    
+# ==============================================
+# CUSTOM CSS - SIDEBAR WARNA KUNING MUDA
+# ==============================================
+st.markdown(
+    """
+    <style>
+    /* Sidebar berwarna kuning muda */
+    [data-testid="stSidebar"] {
+        background-color: #fff9c4;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # ==============================================
 # SIDEBAR INPUT
@@ -215,9 +230,9 @@ def display_classification_report_full(report_str, model_name):
                 weighted_f1 = parts[3]  # kolom ke-4 = f1-score
 
     if acc is not None:
-        st.info(f"✅ **Accuracy:** {acc}")
+        st.info(f"**Accuracy:** {acc}")
     if weighted_f1 is not None:
-        st.info(f"✅ **Weighted F1-Score:** {weighted_f1}")
+        st.info(f"**Weighted F1-Score:** {weighted_f1}")
 
 # Panggil function untuk SVM dan KNN
 colA, colB = st.columns(2)
@@ -227,4 +242,4 @@ with colB:
     display_classification_report_full(knn_report, "KNN")
 
 st.write("---")
-st.caption("🌈 © 2025 — Roblox Popularity ML Deployment | Ceria Theme 🌈")
+st.caption(" © 2025 — Roblox Popularity Deployment ")
