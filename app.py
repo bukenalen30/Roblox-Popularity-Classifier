@@ -183,52 +183,24 @@ if svm_matrix is not None or knn_matrix is not None:
 # ==============================================
 # TAMPILKAN CLASSIFICATION REPORT DENGAN TABEL + METRIK
 # ==============================================
-def display_classification_report(report_str, model_name):
+# ==============================================
+# TAMPILKAN CLASSIFICATION REPORT LENGKAP
+# ==============================================
+def display_classification_report_full(report_str, model_name):
     if report_str is None:
         st.warning(f"{model_name} classification report tidak tersedia.")
         return
 
     st.subheader(f"📈 {model_name} Classification Report")
-    report_data = []
-    lines = report_str.split('\n')
-    for line in lines[2:5]:  # High, Low, Medium
-        row = line.strip().split()
-        if len(row) < 4:
-            continue
-        label, precision, recall, f1, support = row[0], float(row[1]), float(row[2]), float(row[3]), int(row[4])
-        report_data.append([label, precision, recall, f1, support])
-
-    df = pd.DataFrame(report_data, columns=['Class', 'Precision', 'Recall', 'F1-Score', 'Support'])
-    st.table(df)
-
-    # Weighted F1 dan Accuracy
-    weighted_f1 = None
-    accuracy = None
-    for line in lines:
-        if 'weighted avg' in line:
-            parts = line.strip().split()
-            if len(parts) >= 4:
-                try:
-                    weighted_f1 = float(parts[3])
-                except:
-                    continue
-        if 'accuracy' in line:
-            parts = line.strip().split()
-            try:
-                accuracy = float(parts[-2])
-            except:
-                continue
-    if weighted_f1 is not None:
-        st.markdown(f"**Weighted F1-Score:** {weighted_f1:.2f}")
-    if accuracy is not None:
-        st.markdown(f"**Accuracy:** {accuracy:.2f}")
+    # Tampilkan seluruh string report dalam pre-formatted block
+    st.code(report_str, language=None)  # gunakan st.code agar rapi
 
 # Panggil function untuk SVM dan KNN
 colA, colB = st.columns(2)
 with colA:
-    display_classification_report(svm_report, "SVM")
+    display_classification_report_full(svm_report, "SVM")
 with colB:
-    display_classification_report(knn_report, "KNN")
+    display_classification_report_full(knn_report, "KNN")
 
 st.write("---")
 st.caption("🌈 © 2025 — Roblox Popularity ML Deployment | Ceria Theme 🌈")
