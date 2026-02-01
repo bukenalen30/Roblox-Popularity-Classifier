@@ -201,7 +201,6 @@ def display_classification_report(report_str, model_name):
         report_data.append([label, precision, recall, f1, support])
     df = pd.DataFrame(report_data, columns=['Class', 'Precision', 'Recall', 'F1-Score', 'Support'])
     st.table(df)
-    st.bar_chart(df.set_index('Class')['F1-Score'])
 
 # Panggil function untuk SVM dan KNN
 colA, colB = st.columns(2)
