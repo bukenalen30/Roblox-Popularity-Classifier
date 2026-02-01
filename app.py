@@ -36,27 +36,42 @@ st.markdown(
 # Load logo Roblox
 logo = Image.open("logo_roblox.jpeg")  # pastikan file ada di folder yang sama
 
-# Buat 3 kolom: kiri kosong, tengah judul + emoji, kanan logo
+# Layout 3 kolom: kiri kosong, tengah judul+emoji, kanan logo
 col1, col2, col3 = st.columns([1, 4, 1])
 
 with col1:
-    st.write("")  # kosong
+    st.write("")
 
 with col2:
     st.markdown(
         """
         <div style="
             text-align:center; 
-            background: linear-gradient(90deg, #cceeff, #99ddff);  /* contoh biru ceria */
-            padding:25px 20px 25px 20px; 
+            background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50, #e91e63);
+            padding:25px 20px; 
             border-radius:12px; 
-            border:2px solid #99ddff;">
-            <h1 style="margin:0; line-height:1.2; color:#004080;">Roblox Popularity Classifier 📊</h1>
-            <p style="margin:0; font-size:16px; line-height:1.2; color:#004080;">Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN</p>
+            border:2px solid #ffc107;">
+            <h1 style="margin:0; line-height:1.2; color:white;">Roblox Popularity Classifier 📊</h1>
+            <p style="margin:0; font-size:16px; line-height:1.2; color:white;">Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN</p>
         </div>
         """,
         unsafe_allow_html=True
     )
+
+with col3:
+    # container untuk vertical center logo
+    st.markdown(
+        """
+        <div style="
+            display:flex;
+            align-items:center;
+            height:100%;
+        "></div>
+        """,
+        unsafe_allow_html=True
+    )
+    st.image(logo, width=100)  # logo di kanan, vertikal center
+
 
 with col3:
     # Gunakan container flex agar logo vertikal center
