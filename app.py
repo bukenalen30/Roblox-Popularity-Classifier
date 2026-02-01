@@ -13,10 +13,11 @@ st.set_page_config(page_title="Roblox Popularity Classifier 🌈", layout="wide"
 st.markdown(
     """
     <style>
-    /* Background biru ceria */
-    body {
+    /* Background biru ceria untuk seluruh app */
+    .stApp {
         background: linear-gradient(135deg, #cceeff, #99ddff);
     }
+
     /* Hapus padding default Streamlit */
     .block-container {
         padding-top: 2rem;
@@ -33,9 +34,14 @@ st.markdown(
 # ==============================================
 st.markdown("""
     <div style="background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50, #e91e63);
-                padding:20px; border-radius:12px; border:2px solid #ffc107; margin-bottom:20px;">
-        <h1 style="color:white; text-align:center;">🌈 Roblox Game Popularity Classifier 🌈</h1>
-        <p style="color:white; text-align:center;">Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN.</p>
+                padding:20px; border-radius:12px; border:2px solid #ffc107; margin-bottom:20px; text-align:center;">
+        <!-- Logo Roblox PNG -->
+        <img src="roblox_logo.png" width="60" style="vertical-align:middle;">
+        <!-- Judul -->
+        <span style="font-size:28px; color:white; font-weight:bold; margin:0 10px;">Roblox Popularity Classifier</span>
+        <!-- Emoji diagram -->
+        <span style="font-size:28px;">📊</span>
+        <p style="color:white;">Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN.</p>
     </div>
 """, unsafe_allow_html=True)
 
@@ -127,36 +133,37 @@ if st.sidebar.button("🌟 Prediksi"):
             st.info(f"**KNN:** {knn_label}")
 
 # ==============================================
-# VISUALISASI CONFUSION MATRIX (SOFT COLORS)
+# VISUALISASI CONFUSION MATRIX DENGAN WARNA SOFT & BERBEDA
 # ==============================================
 if svm_matrix is not None or knn_matrix is not None:
     st.header("📊 Confusion Matrix Model")
 
-    def plot_matrix(matrix, title):
+    def plot_matrix(matrix, title, cmap_color):
         fig, ax = plt.subplots()
-        # Gunakan warna soft - Blues atau Pastel1
-        cax = ax.imshow(matrix, cmap="Blues", alpha=0.6)
+        # Warna soft sesuai cmap_color
+        cax = ax.imshow(matrix, cmap=cmap_color, alpha=0.8)
         ax.set_title(title, color="#333333")
         ax.set_xlabel("Predicted", color="#333333")
         ax.set_ylabel("Actual", color="#333333")
         
-        # Tambahkan nilai di tengah kotak
+        # Tampilkan angka di tengah kotak
         for i in range(matrix.shape[0]):
             for j in range(matrix.shape[1]):
                 ax.text(j, i, matrix[i, j], ha="center", va="center", color="black", fontsize=12)
         
         # Tambahkan colorbar
         fig.colorbar(cax, ax=ax, fraction=0.046, pad=0.04)
-        
         st.pyplot(fig)
 
     colA, colB = st.columns(2)
     with colA:
         if svm_matrix is not None:
-            plot_matrix(svm_matrix, "Confusion Matrix - SVM")
+            # SVM = soft biru
+            plot_matrix(svm_matrix, "Confusion Matrix - SVM", cmap_color="Blues")
     with colB:
         if knn_matrix is not None:
-            plot_matrix(knn_matrix, "Confusion Matrix - KNN")
+            # KNN = soft hijau
+            plot_matrix(knn_matrix, "Confusion Matrix - KNN", cmap_color="Greens")
 
 st.write("---")
 st.caption("🌈 © 2025 — Roblox Popularity ML Deployment | Ceria Theme 🌈")
