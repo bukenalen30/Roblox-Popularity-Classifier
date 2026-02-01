@@ -127,20 +127,27 @@ if st.sidebar.button("🌟 Prediksi"):
             st.info(f"**KNN:** {knn_label}")
 
 # ==============================================
-# VISUALISASI CONFUSION MATRIX
+# VISUALISASI CONFUSION MATRIX (SOFT COLORS)
 # ==============================================
 if svm_matrix is not None or knn_matrix is not None:
     st.header("📊 Confusion Matrix Model")
 
     def plot_matrix(matrix, title):
         fig, ax = plt.subplots()
-        ax.imshow(matrix, cmap="coolwarm")
-        ax.set_title(title, color="#ff5722")
-        ax.set_xlabel("Predicted", color="#4caf50")
-        ax.set_ylabel("Actual", color="#4caf50")
+        # Gunakan warna soft - Blues atau Pastel1
+        cax = ax.imshow(matrix, cmap="Blues", alpha=0.6)
+        ax.set_title(title, color="#333333")
+        ax.set_xlabel("Predicted", color="#333333")
+        ax.set_ylabel("Actual", color="#333333")
+        
+        # Tambahkan nilai di tengah kotak
         for i in range(matrix.shape[0]):
             for j in range(matrix.shape[1]):
-                ax.text(j, i, matrix[i, j], ha="center", va="center", color="black")
+                ax.text(j, i, matrix[i, j], ha="center", va="center", color="black", fontsize=12)
+        
+        # Tambahkan colorbar
+        fig.colorbar(cax, ax=ax, fraction=0.046, pad=0.04)
+        
         st.pyplot(fig)
 
     colA, colB = st.columns(2)
