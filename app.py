@@ -51,8 +51,8 @@ with col2:
         <div style="
             text-align:center; 
             background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50, #e91e63);
-            margin-top: 20px
-            padding:10px ; 
+            margin-top:20px
+            padding:10px 20px 25px 20px ; 
             border-radius:12px; 
             border:2px solid #ffc107;
             margin-bottom:20px ">
