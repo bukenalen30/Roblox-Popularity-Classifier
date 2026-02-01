@@ -36,33 +36,30 @@ st.markdown(
 # Load logo Roblox
 logo = Image.open("logo_roblox.jpeg")  # pastikan file ada di folder yang sama
 
-st.markdown(
-    f"""
-    <div style="
-        display: flex;
-        justify-content: center;
-        align-items: center;       /* center vertikal semua isi */
-        background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50, #e91e63);
-        padding: 20px; border-radius:12px; border:2px solid #ffc107;
-        margin-bottom:20px;
-    ">
-        <!-- Kolom kiri kosong -->
-        <div style="flex:1"></div>
+# Gunakan 3 kolom: kiri kosong, tengah judul, kanan logo
+col1, col2, col3 = st.columns([1, 4, 1])
 
-        <!-- Judul + Emoji di tengah -->
-        <div style="flex:4; text-align:center; color:white;">
-            <h1 style="margin:0; line-height:1.2;">Roblox Popularity Classifier 📊</h1>
-            <p style="margin:0; font-size:16px; line-height:1.2;">Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN</p>
-        </div>
+with col1:
+    st.write("")  # kosongkan kolom kiri
 
-        <!-- Logo Roblox di kanan -->
-        <div style="flex:1; text-align:right; display:flex; justify-content:flex-end; align-items:center;">
-            <img src="logo_roblox.jpeg" width="100" style="display:inline-block; vertical-align:middle; margin:0;">
+with col2:
+    st.markdown(
+        """
+        <div style="
+            text-align:center;
+            background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50, #e91e63);
+            padding: 20px; border-radius:12px; border:2px solid #ffc107;">
+            <h1 style="margin:0; line-height:1.2; color:white;">Roblox Popularity Classifier 📊</h1>
+            <p style="margin:0; font-size:16px; line-height:1.2; color:white;">
+                Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN
+            </p>
         </div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+        """,
+        unsafe_allow_html=True
+    )
+
+with col3:
+    st.image(logo, width=100)  # logo besar, di kanan
 
 # ==============================================
 # LOAD MODEL DAN RESOURCE
