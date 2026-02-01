@@ -52,7 +52,7 @@ with col2:
             padding:10px 20px 25px 20px; 
             border-radius:12px; 
             border:2px solid #ffc107;
-            margin-bottom:20px ">
+            margin-bottom:50px ">
             <h1 style="margin:5px 0 0 0; line-height:1.2; color:white;">Roblox Popularity Classifier 📊</h1>
             <p style="margin:5px 0 0 0; font-size:16px; line-height:1.2; color:white;">Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN</p>
         </div>
