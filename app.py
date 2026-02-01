@@ -35,14 +35,35 @@ st.markdown(
 from PIL import Image
 import streamlit as st
 
-logo = Image.open("logo_roblox.jpeg")  # pastikan nama file sesuai
-st.image(logo, width=60)  # tampilkan logo
+# ==============================================
+# HEADER DENGAN LOGO ROBLOX DI KIRI + JUDUL DI TENGAH + EMOJI DIAGRAM
+# ==============================================
+# Load logo Roblox JPEG
+logo = Image.open("logo_roblox.jpeg")
 
-st.markdown("""
-    <span style="font-size:28px; color:white; font-weight:bold; margin-left:10px;">Roblox Popularity Classifier</span>
-    <span style="font-size:28px;">📊</span>
-    <p style="color:white;">Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN.</p>
-""", unsafe_allow_html=True)
+st.markdown(
+    f"""
+    <div style="
+        display: flex;
+        justify-content: center;   /* center horizontally */
+        align-items: center;       /* center vertically */
+        background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50, #e91e63);
+        padding: 20px; border-radius:12px; border:2px solid #ffc107;
+        margin-bottom:20px;
+    ">
+        <!-- Logo Roblox -->
+        <img src="logo_roblox.jpeg" width="60" style="margin-right:15px;">
+        
+        <!-- Judul dan Emoji -->
+        <div style="text-align:center; color:white;">
+            <span style="font-size:28px; font-weight:bold;">Roblox Popularity Classifier</span>
+            <span style="font-size:28px; margin-left:10px;">📊</span>
+            <p style="margin:0; font-size:16px;">Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN.</p>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # ==============================================
 # LOAD MODEL DAN RESOURCE
