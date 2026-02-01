@@ -183,8 +183,7 @@ if svm_matrix is not None or knn_matrix is not None:
 # ==============================================
 # TAMPILKAN CLASSIFICATION REPORT DENGAN TABEL + METRIK
 # ==============================================
-# ==============================================
-# TAMPILKAN CLASSIFICATION REPORT LENGKAP
+# TAMPILKAN CLASSIFICATION REPORT LENGKAP + Accuracy & Weighted F1
 # ==============================================
 def display_classification_report_full(report_str, model_name):
     if report_str is None:
@@ -192,8 +191,33 @@ def display_classification_report_full(report_str, model_name):
         return
 
     st.subheader(f"📈 {model_name} Classification Report")
-    # Tampilkan seluruh string report dalam pre-formatted block
-    st.code(report_str, language=None)  # gunakan st.code agar rapi
+    
+    # Tampilkan seluruh string report
+    st.code(report_str, language=None)
+
+    # ==============================
+    # Ekstrak Accuracy & Weighted F1
+    # ==============================
+    acc = None
+    weighted_f1 = None
+
+    lines = report_str.split('\n')
+    for line in lines:
+        if "accuracy" in line.lower():
+            # Accuracy biasanya di line seperti: accuracy                           0.81      200
+            parts = line.strip().split()
+            if len(parts) >= 2:
+                acc = parts[1]
+        if "weighted avg" in line.lower():
+            # Weighted avg biasanya di line seperti: weighted avg       0.81      0.81      0.81       200
+            parts = line.strip().split()
+            if len(parts) >= 5:
+                weighted_f1 = parts[3]  # kolom ke-4 = f1-score
+
+    if acc is not None:
+        st.info(f"✅ **Accuracy:** {acc}")
+    if weighted_f1 is not None:
+        st.info(f"✅ **Weighted F1-Score:** {weighted_f1}")
 
 # Panggil function untuk SVM dan KNN
 colA, colB = st.columns(2)
