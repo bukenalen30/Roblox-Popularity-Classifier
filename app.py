@@ -8,6 +8,27 @@ import os
 st.set_page_config(page_title="Roblox Popularity Classifier 🌈", layout="wide")
 
 # ==============================================
+# CUSTOM CSS - BACKGROUND BIRU CERIA
+# ==============================================
+st.markdown(
+    """
+    <style>
+    /* Background biru ceria */
+    body {
+        background: linear-gradient(135deg, #cceeff, #99ddff);
+    }
+    /* Hapus padding default Streamlit */
+    .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+    </style>
+    """, unsafe_allow_html=True
+)
+
+# ==============================================
 # CERIA HEADER
 # ==============================================
 st.markdown("""
@@ -28,13 +49,17 @@ def load_all():
         knn = joblib.load("knn_model.pkl")
         scaler = joblib.load("scaler.pkl")
         features = joblib.load("features.pkl")
-        evaluation = joblib.load("evaluation.pkl") if "evaluation.pkl" in os.listdir() else None
-        return svm, knn, scaler, features, evaluation
+        
+        # Load confusion matrix jika ada
+        svm_matrix = joblib.load("svm_confusion_matrix.pkl") if "svm_confusion_matrix.pkl" in os.listdir() else None
+        knn_matrix = joblib.load("knn_confusion_matrix.pkl") if "knn_confusion_matrix.pkl" in os.listdir() else None
+        
+        return svm, knn, scaler, features, svm_matrix, knn_matrix
     except Exception as e:
         st.error(f"❌ Gagal load model atau resource: {e}")
-        return None, None, None, None, None
+        return None, None, None, None, None, None
 
-svm_model, knn_model, scaler, feature_cols, evaluation = load_all()
+svm_model, knn_model, scaler, feature_cols, svm_matrix, knn_matrix = load_all()
 
 # ==============================================
 # CEK VALIDITAS MODEL
@@ -104,11 +129,8 @@ if st.sidebar.button("🌟 Prediksi"):
 # ==============================================
 # VISUALISASI CONFUSION MATRIX
 # ==============================================
-if evaluation:
+if svm_matrix is not None or knn_matrix is not None:
     st.header("📊 Confusion Matrix Model")
-
-    svm_matrix = evaluation.get("svm_matrix")
-    knn_matrix = evaluation.get("knn_matrix")
 
     def plot_matrix(matrix, title):
         fig, ax = plt.subplots()
