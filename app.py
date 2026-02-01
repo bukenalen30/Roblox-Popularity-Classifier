@@ -181,10 +181,8 @@ if svm_matrix is not None or knn_matrix is not None:
             plot_matrix(knn_matrix, "Confusion Matrix - KNN", cmap_color="Greens")
 
 # ==============================================
-# TAMPILKAN CLASSIFICATION REPORT DENGAN TABEL + BAR CHART
+# TAMPILKAN CLASSIFICATION REPORT DENGAN TABEL + METRIK
 # ==============================================
-import pandas as pd
-
 def display_classification_report(report_str, model_name):
     if report_str is None:
         st.warning(f"{model_name} classification report tidak tersedia.")
@@ -199,14 +197,32 @@ def display_classification_report(report_str, model_name):
             continue
         label, precision, recall, f1, support = row[0], float(row[1]), float(row[2]), float(row[3]), int(row[4])
         report_data.append([label, precision, recall, f1, support])
+
     df = pd.DataFrame(report_data, columns=['Class', 'Precision', 'Recall', 'F1-Score', 'Support'])
     st.table(df)
 
-if weighted_f1 is not None:
+    # Weighted F1 dan Accuracy
+    weighted_f1 = None
+    accuracy = None
+    for line in lines:
+        if 'weighted avg' in line:
+            parts = line.strip().split()
+            if len(parts) >= 4:
+                try:
+                    weighted_f1 = float(parts[3])
+                except:
+                    continue
+        if 'accuracy' in line:
+            parts = line.strip().split()
+            try:
+                accuracy = float(parts[-2])
+            except:
+                continue
+    if weighted_f1 is not None:
         st.markdown(f"**Weighted F1-Score:** {weighted_f1:.2f}")
     if accuracy is not None:
         st.markdown(f"**Accuracy:** {accuracy:.2f}")
-        
+
 # Panggil function untuk SVM dan KNN
 colA, colB = st.columns(2)
 with colA:
