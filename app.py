@@ -36,7 +36,7 @@ st.markdown("""
     <div style="background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50, #e91e63);
                 padding:20px; border-radius:12px; border:2px solid #ffc107; margin-bottom:20px; text-align:center;">
         <!-- Logo Roblox PNG -->
-        <img src="logo_roblox.png" width="60" style="vertical-align:middle;">
+        <img src="logo_roblox.jpeg" width="60" style="vertical-align:middle;">
         <!-- Judul -->
         <span style="font-size:28px; color:white; font-weight:bold; margin:0 10px;">Roblox Popularity Classifier</span>
         <!-- Emoji diagram -->
