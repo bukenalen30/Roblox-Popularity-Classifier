@@ -33,8 +33,8 @@ st.markdown(
 # ==============================================
 # CERIA HEADER
 # ==============================================
-logo = Image.open("logo_roblox.jpeg")  # pastikan file ada di folder yang sama
-st.markdown("<br><br>", unsafe_allow_html=True)  # jarak dari atas
+logo = Image.open("logo_roblox.jpeg")  
+st.markdown("<br><br>", unsafe_allow_html=True) 
 
 col1, col2, col3 = st.columns([1, 4, 1])
 with col1:
@@ -45,7 +45,7 @@ with col2:
         <div style="
             text-align:center; 
             background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50, #e91e63);
-            padding:40px; 
+            padding:20px; 
             border-radius:12px; 
             border:2px solid #ffc107;
             margin-bottom:20px ">
