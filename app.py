@@ -58,11 +58,27 @@ st.markdown(
 # ==============================================
 # CERIA HEADER
 # ==============================================
+import base64
+import streamlit as st
+
+def img_to_base64(path):
+    with open(path, "rb") as f:
+        return base64.b64encode(f.read()).decode()
+
+logo_left = img_to_base64("ysalen.png")
+logo_right = img_to_base64("salen.png")
+
 col1, col2, col3 = st.columns([1.5, 6, 1.5])
 
 with col1:
-    st.markdown("<br><br><br>", unsafe_allow_html=True)
-    st.image("ysalen.png", width=200)
+    st.markdown(
+        f"""
+        <div style="display:flex; justify-content:center; align-items:center; height:100%;">
+            <img src="data:image/png;base64,{logo_left}" style="width:220px;">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 with col2:
     st.markdown("<br><br>", unsafe_allow_html=True)
@@ -89,9 +105,9 @@ with col2:
 
 with col3:
     st.markdown(
-        """
-        <div style="display:flex; justify-content:center;">
-            <img src="salen.png" style="width:220px; max-width:none;">
+        f"""
+        <div style="display:flex; justify-content:center; align-items:center; height:100%;">
+            <img src="data:image/png;base64,{logo_right}" style="width:220px;">
         </div>
         """,
         unsafe_allow_html=True
