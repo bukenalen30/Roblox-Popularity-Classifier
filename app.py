@@ -58,9 +58,16 @@ st.markdown(
 # ==============================================
 # CERIA HEADER
 # ==============================================
+import base64
+
+def img_to_base64(path):
+    with open(path, "rb") as f:
+        return base64.b64encode(f.read()).decode()
+
+logo_right = img_to_base64("salen.png")
 
 st.markdown(
-    """
+    f"""
     <div style="
         display:flex;
         align-items:center;
@@ -69,8 +76,6 @@ st.markdown(
         margin-top:40px;
         margin-bottom:20px;
     ">
-        <img src="logo_left.png" style="width:120px; height:auto;">
-
         <div style="
             flex:1;
             text-align:center;
@@ -87,7 +92,7 @@ st.markdown(
             </p>
         </div>
 
-        <img src="salen.png" style="width:120px; height:auto;">
+        <img src="data:image/png;base64,{logo_right}" style="width:120px;">
     </div>
     """,
     unsafe_allow_html=True
