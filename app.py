@@ -58,45 +58,37 @@ st.markdown(
 # ==============================================
 # CERIA HEADER
 # ==============================================
-import base64
+col1, col2, col3 = st.columns([1, 6, 1])
 
-def img_to_base64(path):
-    with open(path, "rb") as f:
-        return base64.b64encode(f.read()).decode()
+with col1:
+    st.image("logo_left.png", width=80)
 
-logo_right = img_to_base64("salen.png")
-
-st.markdown(
-    f"""
-    <div style="
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        gap:20px;
-        margin-top:40px;
-        margin-bottom:20px;
-    ">
+with col2:
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown(
+        """
         <div style="
-            flex:1;
-            text-align:center;
+            text-align:center; 
             background: linear-gradient(90deg, #ff5722, #ff7043, #ffb74d, #ffd54f, #fff176);
-            padding:25px;
-            border-radius:20px;
+            padding:20px; 
+            border-radius:20px; 
             border:8px solid #0d47a1;
+            margin-bottom:20px;
         ">
-            <h1 style="margin:5px 0; line-height:1.2; color:white; font-size:40px;">
+            <h1 style="margin:5px 0; line-height:1.2; color:white; font-size:38px;">
                 Roblox Popularity Classifier 📊
             </h1>
             <p style="margin:5px 0; font-size:18px; line-height:1.2; color:white;">
                 Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN
             </p>
         </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-        <img src="data:image/png;base64,{logo_right}" style="width:120px;">
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+with col3:
+    st.image("salen.png", width=80)
+
 
 # ==============================================
 # LOAD MODEL DAN RESOURCE
