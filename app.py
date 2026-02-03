@@ -61,7 +61,7 @@ st.markdown(
 col1, col2, col3 = st.columns([1, 6, 1])
 
 with col1:
-    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("<br><br><br>", unsafe_allow_html=True)
     st.image("ysalen.png", width=180)
 
 with col2:
@@ -70,10 +70,10 @@ with col2:
         """
         <div style="
             text-align:center; 
-            background: linear-gradient(90deg, #ff5722, #ff7043, #ffb74d, #ffd54f, #fff176);
+            background: linear-gradient(background: 90deg, #f06292, #f48fb1, #f8bbd0, #fce4ec);
             padding:20px; 
             border-radius:20px; 
-            border:8px solid #0d47a1;
+            border:8px solid #ad1457;
             margin-bottom:20px;
         ">
             <h1 style="margin:5px 0; line-height:1.2; color:white; font-size:38px;">
