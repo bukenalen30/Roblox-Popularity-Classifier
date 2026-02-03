@@ -100,7 +100,7 @@ with col2:
             background: linear-gradient(90deg, #f06292, #f48fb1, #f8bbd0, #f8bbd0, #f48fb1);
             padding:20px; 
             border-radius:20px; 
-            border:8px solid #e91e63;
+            border:8px solid #f06292;
             margin-bottom:20px;
         ">
             <h1 style="margin:5px 0; line-height:1.2; color:white; font-size:38px;">
