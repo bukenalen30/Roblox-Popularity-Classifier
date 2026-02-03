@@ -113,7 +113,7 @@ with col2:
             margin-bottom:20px;
         ">
             <h1 style="margin:5px 0; line-height:1.2; color:white; font-size:38px;">
-                Roblox Popularity Classifier 📊
+                ✨ Roblox Popularity Classifier 🚀
             </h1>
             <p style="margin:5px 0; font-size:18px; line-height:1.2; color:white;">
                 Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN
