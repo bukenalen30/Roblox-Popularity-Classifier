@@ -26,7 +26,7 @@ st.markdown(
     }
 
     [data-testid="stSidebar"] input {
-        background-color: 135dege;
+        background-color: #cceeff;
         color: black;
     }
     </style>
