@@ -67,18 +67,42 @@ with col2:
     st.markdown(
         """
         <div style="
-            text-align:center; 
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
             background: linear-gradient(90deg, #ff5722, #ff7043, #ffb74d, #ffd54f, #fff176);
-            padding:20px; 
-            border-radius:20px; 
+            padding:20px 30px;
+            border-radius:20px;
             border:8px solid #0d47a1;
-            margin-bottom:20px ">
-            <h1 style="margin:5px 0 0 0; line-height:1.2; color:white;">Roblox Popularity Classifier 📊</h1>
-            <p style="margin:5px 0 0 0; font-size:16px; line-height:1.2; color:white;">Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN</p>
+            margin-bottom:20px;
+        ">
+            <img src="ysalen.png" style="width:70px; height:auto;">
+
+            <div style="text-align:center; flex:1;">
+                <h1 style="
+                    margin:5px 0;
+                    line-height:1.2;
+                    color:white;
+                    font-size:38px;
+                ">
+                    Roblox Popularity Classifier 📊
+                </h1>
+                <p style="
+                    margin:5px 0;
+                    font-size:18px;
+                    line-height:1.2;
+                    color:white;
+                ">
+                    Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN
+                </p>
+            </div>
+
+            <img src="salen.png" style="width:70px; height:auto;">
         </div>
         """,
         unsafe_allow_html=True
     )
+
 
 # ==============================================
 # LOAD MODEL DAN RESOURCE
