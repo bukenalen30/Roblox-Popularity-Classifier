@@ -290,7 +290,7 @@ if svm_matrix is not None or knn_matrix is not None:
     colA, colB = st.columns(2)
     with colA:
         if svm_matrix is not None:
-            plot_matrix(svm_matrix, "Confusion Matrix - SVM", cmap_color="Green")
+            plot_matrix(svm_matrix, "Confusion Matrix - SVM", cmap_color="Greens")
     with colB:
         if knn_matrix is not None:
             plot_matrix(knn_matrix, "Confusion Matrix - KNN", cmap_color="Blue")
