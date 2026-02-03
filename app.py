@@ -32,8 +32,8 @@ st.markdown(
 
     /* BUTTON SIDEBAR */
     [data-testid="stSidebar"] button {
-        background-color: #ffb6c1;   /* pink muda */
-        color: black !important;     /* teks hitam */
+        background-color: #f06292;   
+        color: black !important;    
         font-weight: bold;
         border-radius: 10px;
         border: none;
