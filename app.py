@@ -139,7 +139,7 @@ if logo is not None:
     st.sidebar.markdown(
         f"""
         <div style="display:flex; justify-content:center; margin-bottom:15px;">
-            <img src="data:image/jpeg;base64,{encoded}" width="150">
+            <img src="data:image/jpeg;base64,{encoded}" width="170">
         </div>
         """,
         unsafe_allow_html=True
