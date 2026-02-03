@@ -71,7 +71,7 @@ logo_right = img_to_base64("salen.png")
 col1, col2, col3 = st.columns([1.5, 6, 1.5])
 
 with col1:
-    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("<br><br><br>", unsafe_allow_html=True)
     st.markdown(
         f"""
         <div style="display:flex; justify-content:center; align-items:center; height:150%;">
@@ -105,7 +105,7 @@ with col2:
     )
 
 with col3:
-    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
     st.markdown(
         f"""
         <div style="display:flex; justify-content:center; align-items:center; height:150%;">
