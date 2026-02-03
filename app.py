@@ -124,6 +124,8 @@ st.markdown(
 # ==============================================
 # SIDEBAR LOGO
 # ==============================================
+import base64
+
 logo = None
 try:
     logo = Image.open("logo_roblox.jpeg")
