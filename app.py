@@ -68,10 +68,10 @@ with col2:
         """
         <div style="
             text-align:center; 
-            background: linear-gradient(90deg, #2196f3, #ffeb3b, #ff5722, #2196f3);
+            background: linear-gradient(90deg, #2196f3, #ff5722, #ffeb3b, #ff5722, #2196f3);
             padding:20px; 
-            border-radius:12px; 
-            border:2px solid #ffc107;
+            border-radius:14px; 
+            border:4px solid #ffc107;
             margin-bottom:20px ">
             <h1 style="margin:5px 0 0 0; line-height:1.2; color:white;">Roblox Popularity Classifier 📊</h1>
             <p style="margin:5px 0 0 0; font-size:16px; line-height:1.2; color:white;">Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN</p>
