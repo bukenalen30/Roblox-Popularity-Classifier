@@ -112,7 +112,7 @@ with col2:
             border:8px solid #f06292;
             margin-bottom:20px;
         ">
-            <h1 style="margin:5px 0; line-height:1.2; color:white; font-size:35px;">
+            <h1 style="margin:5px 0; line-height:1.2; color:white; font-size:32px;">
                 ✨ Roblox Game Popularity Prediction 🚀
             </h1>
             <p style="margin:5px 0; font-size:18px; line-height:1.2; color:white;">
