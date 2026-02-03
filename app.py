@@ -88,7 +88,7 @@ with col2:
     )
 
 with col3:
-    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("<br><br>", unsafe_allow_html=True)
     st.image("salen.png", width=200)
 
 
