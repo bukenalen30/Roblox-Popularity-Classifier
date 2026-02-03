@@ -70,10 +70,10 @@ with col2:
         """
         <div style="
             text-align:center; 
-            background: linear-gradient(90deg, #f06292, #f48fb1, #f8bbd0, #fce4ec);
+            background: linear-gradient(90deg, #f06292, #f48fb1, #f8bbd0, #fce4ec, #f8bbd0);
             padding:20px; 
             border-radius:20px; 
-            border:8px solid #ad1457;
+            border:8px solid #c2185b;
             margin-bottom:20px;
         ">
             <h1 style="margin:5px 0; line-height:1.2; color:white; font-size:38px;">
