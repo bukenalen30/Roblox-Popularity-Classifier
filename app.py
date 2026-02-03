@@ -136,6 +136,7 @@ st.markdown(
 # SIDEBAR LOGO
 # ==============================================
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
+logo = Image.open("logo_roblox.jpeg")
 st.sidebar.image(logo, width=150)
 st.sidebar.markdown("<hr>", unsafe_allow_html=True)
 # ==============================================
