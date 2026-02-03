@@ -53,18 +53,6 @@ with col2:
         """,
         unsafe_allow_html=True
     )
-with col3:
-    st.markdown(
-        """
-        <div style="
-            display:flex;
-            align-items:center;
-            height:150%;
-        "></div>
-        """,
-        unsafe_allow_html=True
-    )
-    st.image(logo, width=120)  # logo kanan, vertikal center
 
 # ==============================================
 # LOAD MODEL DAN RESOURCE
