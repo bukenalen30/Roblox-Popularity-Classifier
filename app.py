@@ -6,20 +6,44 @@ import matplotlib.pyplot as plt
 import os
 from PIL import Image
 
+# ==============================================
+# CUSTOM CSS - BACKGROUND BIRU CERIA
+# ==============================================
 st.set_page_config(page_title="Roblox Popularity Classifier 🌈", layout="wide")
 
 # ==============================================
-# CUSTOM CSS - BACKGROUND BIRU CERIA
+# CUSTOM CSS - SIDEBAR BIRU TUA CERAH
 # ==============================================
 st.markdown(
     """
     <style>
-    /* Background biru ceria untuk seluruh app */
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #0d47a1, #1565c0, #1e88e5);
+    }
+
+    [data-testid="stSidebar"] * {
+        color: white;
+    }
+
+    [data-testid="stSidebar"] input {
+        background-color: white;
+        color: black;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# ==============================================
+# CUSTOM CSS - BACKGROUND MAIN PAGE
+# ==============================================
+st.markdown(
+    """
+    <style>
     .stApp {
         background: linear-gradient(135deg, #cceeff, #99ddff);
     }
 
-    /* Hapus padding default Streamlit */
     .block-container {
         padding-top: 2rem;
         padding-bottom: 2rem;
@@ -27,7 +51,8 @@ st.markdown(
         padding-right: 3rem;
     }
     </style>
-    """, unsafe_allow_html=True
+    """,
+    unsafe_allow_html=True
 )
 
 # ==============================================
