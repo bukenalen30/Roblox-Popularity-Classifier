@@ -44,7 +44,7 @@ with col2:
         """
         <div style="
             text-align:center; 
-            background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50, #e91e63);
+            background: linear-gradient(90deg, #ffeb3b, #ff5722, #2196f3, #4caf50);
             padding:20px; 
             border-radius:12px; 
             border:2px solid #ffc107;
@@ -190,13 +190,11 @@ if svm_matrix is not None or knn_matrix is not None:
     colA, colB = st.columns(2)
     with colA:
         if svm_matrix is not None:
-            plot_matrix(svm_matrix, "Confusion Matrix - SVM", cmap_color="Blues")
+            plot_matrix(svm_matrix, "Confusion Matrix - SVM", cmap_color="Greens")
     with colB:
         if knn_matrix is not None:
-            plot_matrix(knn_matrix, "Confusion Matrix - KNN", cmap_color="Greens")
+            plot_matrix(knn_matrix, "Confusion Matrix - KNN", cmap_color="Blues")
 
-# ==============================================
-# TAMPILKAN CLASSIFICATION REPORT DENGAN TABEL + METRIK
 # ==============================================
 # TAMPILKAN CLASSIFICATION REPORT LENGKAP + Accuracy & Weighted F1
 # ==============================================
@@ -219,12 +217,12 @@ def display_classification_report_full(report_str, model_name):
     lines = report_str.split('\n')
     for line in lines:
         if "accuracy" in line.lower():
-            # Accuracy biasanya di line seperti: accuracy                           0.81      200
+            # Accuracy biasanya di line 
             parts = line.strip().split()
             if len(parts) >= 2:
                 acc = parts[1]
         if "weighted avg" in line.lower():
-            # Weighted avg biasanya di line seperti: weighted avg       0.81      0.81      0.81       200
+            # Weighted avg biasanya di line 
             parts = line.strip().split()
             if len(parts) >= 5:
                 weighted_f1 = parts[3]  # kolom ke-4 = f1-score
