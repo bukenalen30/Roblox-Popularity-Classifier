@@ -37,7 +37,8 @@ st.markdown(
 col1, col2, col3 = st.columns([1, 4, 1])
 with col1:
     st.write("")
-with col2:
+ with col2:
+    st.markdown("<br><br><br>", unsafe_allow_html=True)
     st.markdown(
         """
         <div style="
@@ -130,7 +131,17 @@ except:
     pass
 
 if logo is not None:
-    st.sidebar.image(logo, width=150)
+    with open("logo_roblox.jpeg", "rb") as f:
+        encoded = base64.b64encode(f.read()).decode()
+
+    st.sidebar.markdown(
+        f"""
+        <div style="display:flex; justify-content:center; margin-bottom:15px;">
+            <img src="data:image/jpeg;base64,{encoded}" width="150">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 # ==============================================
 # SIDEBAR INPUT
