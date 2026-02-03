@@ -88,8 +88,14 @@ with col2:
     )
 
 with col3:
-    st.markdown("<br><br>", unsafe_allow_html=True)
-    st.image("salen.png", width=200)
+    st.markdown(
+        """
+        <div style="display:flex; justify-content:center;">
+            <img src="salen.png" style="width:220px; max-width:none;">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 
 # ==============================================
