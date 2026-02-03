@@ -70,7 +70,7 @@ with col2:
         """
         <div style="
             text-align:center; 
-            background: linear-gradient(background: 90deg, #f06292, #f48fb1, #f8bbd0, #fce4ec);
+            background: linear-gradient(90deg, #f06292, #f48fb1, #f8bbd0, #fce4ec);
             padding:20px; 
             border-radius:20px; 
             border:8px solid #ad1457;
