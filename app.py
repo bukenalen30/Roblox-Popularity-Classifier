@@ -83,7 +83,7 @@ with col1:
         ">
             <img src="data:image/png;base64,{logo_left}"
                  style="
-                    height:180px;
+                    height:220px;
                     transform: scale(1.3);
                  ">
         </div>
