@@ -29,6 +29,15 @@ st.markdown(
         background-color: #cceeff;
         color: black;
     }
+
+    /* BUTTON SIDEBAR */
+    [data-testid="stSidebar"] button {
+        background-color: #ffb6c1;   /* pink muda */
+        color: black !important;     /* teks hitam */
+        font-weight: bold;
+        border-radius: 10px;
+        border: none;
+    }
     </style>
     """,
     unsafe_allow_html=True
