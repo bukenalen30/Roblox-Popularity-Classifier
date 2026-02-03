@@ -60,48 +60,35 @@ st.markdown(
 # ==============================================
 
 col1, col2, col3 = st.columns([1, 6, 1])
+
 with col1:
-    st.write("")
+    st.image("ysalen.png", width=80)
+
 with col2:
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown(
         """
         <div style="
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
+            text-align:center; 
             background: linear-gradient(90deg, #ff5722, #ff7043, #ffb74d, #ffd54f, #fff176);
-            padding:20px 30px;
-            border-radius:20px;
+            padding:20px; 
+            border-radius:20px; 
             border:8px solid #0d47a1;
             margin-bottom:20px;
         ">
-            <img src="ysalen.png" style="width:70px; height:auto;">
-
-            <div style="text-align:center; flex:1;">
-                <h1 style="
-                    margin:5px 0;
-                    line-height:1.2;
-                    color:white;
-                    font-size:38px;
-                ">
-                    Roblox Popularity Classifier 📊
-                </h1>
-                <p style="
-                    margin:5px 0;
-                    font-size:18px;
-                    line-height:1.2;
-                    color:white;
-                ">
-                    Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN
-                </p>
-            </div>
-
-            <img src="salen.png" style="width:70px; height:auto;">
+            <h1 style="margin:5px 0; line-height:1.2; color:white; font-size:38px;">
+                Roblox Popularity Classifier 📊
+            </h1>
+            <p style="margin:5px 0; font-size:18px; line-height:1.2; color:white;">
+                Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN
+            </p>
         </div>
         """,
         unsafe_allow_html=True
     )
+
+with col3:
+    st.image("salen.png", width=80)
 
 
 # ==============================================
