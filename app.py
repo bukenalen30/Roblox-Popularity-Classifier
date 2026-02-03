@@ -127,7 +127,7 @@ with col3:
         ">
             <img src="data:image/png;base64,{logo_right}"
                  style="
-                    height:180px;
+                    height:200px;
                     transform: scale(1.3);
                  ">
         </div>
