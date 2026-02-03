@@ -58,7 +58,7 @@ st.markdown(
 # ==============================================
 # CERIA HEADER
 # ==============================================
-col1, col2, col3 = st.columns([2, 6, 2])
+col1, col2, col3 = st.columns([1.5, 6, 1.5])
 
 with col1:
     st.markdown("<br><br><br>", unsafe_allow_html=True)
