@@ -74,7 +74,7 @@ with col1:
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown(
         f"""
-        <div style="display:flex; justify-content:center; align-items:center; height:100%;">
+        <div style="display:flex; justify-content:center; align-items:center; height:150%;">
             <img src="data:image/png;base64,{logo_left}" style="width:280px;">
         </div>
         """,
@@ -108,7 +108,7 @@ with col3:
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown(
         f"""
-        <div style="display:flex; justify-content:center; align-items:center; height:100%;">
+        <div style="display:flex; justify-content:center; align-items:center; height:150%;">
             <img src="data:image/png;base64,{logo_right}" style="width:250px;">
         </div>
         """,
