@@ -74,8 +74,18 @@ with col1:
     st.markdown("<br><br><br>", unsafe_allow_html=True)
     st.markdown(
         f"""
-        <div style="display:flex; justify-content:center; align-items:center; height:150%;">
-            <img src="data:image/png;base64,{logo_left}" style="width:280px;">
+        <div style="
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100%;
+            overflow:visible;
+        ">
+            <img src="data:image/png;base64,{logo_left}"
+                 style="
+                    height:180px;
+                    transform: scale(1.3);
+                 ">
         </div>
         """,
         unsafe_allow_html=True
@@ -108,13 +118,22 @@ with col3:
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown(
         f"""
-        <div style="display:flex; justify-content:center; align-items:center; height:150%;">
-            <img src="data:image/png;base64,{logo_right}" style="width:250px;">
+        <div style="
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100%;
+            overflow:visible;
+        ">
+            <img src="data:image/png;base64,{logo_right}"
+                 style="
+                    height:180px;
+                    transform: scale(1.3);
+                 ">
         </div>
         """,
         unsafe_allow_html=True
     )
-
 
 # ==============================================
 # LOAD MODEL DAN RESOURCE
