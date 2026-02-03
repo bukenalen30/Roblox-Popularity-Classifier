@@ -59,7 +59,7 @@ st.markdown(
 # CERIA HEADER
 # ==============================================
 
-col1, col2, col3 = st.columns([1, 4, 1])
+col1, col2, col3 = st.columns([1, 6, 1])
 with col1:
     st.write("")
 with col2:
@@ -71,7 +71,7 @@ with col2:
             background: linear-gradient(90deg, #2196f3, #ff5722, #ffeb3b, #ff5722, #2196f3);
             padding:20px; 
             border-radius:20px; 
-            border:8px solid #ffc107;
+            border:8px solid #cceeff;
             margin-bottom:20px ">
             <h1 style="margin:5px 0 0 0; line-height:1.2; color:white;">Roblox Popularity Classifier 📊</h1>
             <p style="margin:5px 0 0 0; font-size:16px; line-height:1.2; color:white;">Prediksi tingkat popularitas game Roblox menggunakan model SVM & KNN</p>
