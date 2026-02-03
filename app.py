@@ -237,7 +237,7 @@ if logo is not None:
 # ==============================================
 # SIDEBAR INPUT
 # ==============================================
-st.sidebar.write("### Masukkan fitur game Roblox")
+st.sidebar.write("### Masukkan jumlah per fitur activitas pengguna game Roblox")
 inputs = {}
 for col in feature_cols:
     inputs[col] = st.sidebar.number_input(col, min_value=0, value=0)
