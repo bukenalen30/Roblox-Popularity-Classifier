@@ -290,10 +290,10 @@ if svm_matrix is not None or knn_matrix is not None:
     colA, colB = st.columns(2)
     with colA:
         if svm_matrix is not None:
-            plot_matrix(svm_matrix, "Confusion Matrix - SVM", cmap_color="Greens")
+            plot_matrix(svm_matrix, "Confusion Matrix - SVM", cmap_color="viridis")
     with colB:
         if knn_matrix is not None:
-            plot_matrix(knn_matrix, "Confusion Matrix - KNN", cmap_color="Blues")
+            plot_matrix(knn_matrix, "Confusion Matrix - KNN", cmap_color="plasma")
 
 # ==============================================
 # TAMPILKAN CLASSIFICATION REPORT LENGKAP + Accuracy & Weighted F1
