@@ -22,11 +22,11 @@ st.markdown(
     }
 
     [data-testid="stSidebar"] * {
-        color: white;
+        color: #f48fb1 ;
     }
 
     [data-testid="stSidebar"] input {
-        background-color: pink;
+        background-color: white;
         color: black;
     }
     </style>
