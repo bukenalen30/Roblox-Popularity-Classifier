@@ -61,7 +61,7 @@ st.markdown(
 col1, col2, col3 = st.columns([1, 6, 1])
 
 with col1:
-    st.image("ysalen.png", width=160)
+    st.image("ysalen.png", width=300)
 
 with col2:
     st.markdown("<br><br>", unsafe_allow_html=True)
@@ -87,7 +87,7 @@ with col2:
     )
 
 with col3:
-    st.image("salen.png", width=160)
+    st.image("salen.png", width=300)
 
 
 # ==============================================
