@@ -68,8 +68,7 @@ with col2:
         """
         <div style="
             text-align:center; 
-            background: linear-gradient(90deg, #2196f3, #ff5722, #ffeb3b, #ff5722, #2196f3);
-            background: linear-gradient(90deg, #42a5f5, #ab47bc, #f06292);
+            background: linear-gradient(90deg, #1e88e5, #8e24aa, #ec407a);
             padding:20px; 
             border-radius:20px; 
             border:8px solid #0d47a1;
