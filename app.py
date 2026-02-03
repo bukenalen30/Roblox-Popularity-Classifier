@@ -33,8 +33,6 @@ st.markdown(
 # ==============================================
 # CERIA HEADER
 # ==============================================
-logo = Image.open("logo_roblox.jpeg")  
-st.markdown("<br><br>", unsafe_allow_html=True) 
 
 col1, col2, col3 = st.columns([1, 4, 1])
 with col1:
@@ -134,6 +132,12 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# ==============================================
+# SIDEBAR LOGO
+# ==============================================
+st.sidebar.markdown("<br>", unsafe_allow_html=True)
+st.sidebar.image(logo, width=150)
+st.sidebar.markdown("<hr>", unsafe_allow_html=True)
 # ==============================================
 # SIDEBAR INPUT
 # ==============================================
